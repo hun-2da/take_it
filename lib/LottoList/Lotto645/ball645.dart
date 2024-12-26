@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:take_it/LottoList/lottoBallImagePath.dart';
 
 class ball645 extends StatefulWidget {
-  int ball645Num1 = 0;
-  int ball645Num2 = 0;
-  int ball645Num3 = 0;
-  int ball645Num4 = 0;
-  int ball645Num5 = 0;
-  int ball645Num6 = 0;
-  int ball645Numbonus = 0;
+  int ball645Num1 = -1;
+  int ball645Num2 = -1;
+  int ball645Num3 = -1;
+  int ball645Num4 = -1;
+  int ball645Num5 = -1;
+  int ball645Num6 = -1;
+  int ball645Numbonus = -1;
 
 
   ball645(
@@ -31,8 +31,10 @@ class ball645 extends StatefulWidget {
 }
 class ball_State extends State<ball645> {
   double ballsize = 7.7;
-  double ballopacity = 0.82;
+  double ballopacity = 1;
   String ballIcon = "assets/images/ball_icon.png";
+
+  List <String?> ballNumPath = List.filled(7, null);
 
   String? ballNum1Path;
   String? ballNum2Path;
@@ -48,7 +50,7 @@ class ball_State extends State<ball645> {
     updateBallPaths();
 
 
-    print('bbbbbbbbbbbbbbbbbbbbbbbbbbbb');
+    //print('bbbbbbbbbbbbbbbbbbbbbbbbbbbb');
   }
 
   @override
@@ -62,29 +64,46 @@ class ball_State extends State<ball645> {
 
   void updateBallPaths() {
     setState(() {
-      ballNum1Path = widget.ball645Num1 == 0
-          ? ballIcon
-          : lottoImagePath.ball645imagePath(widget.ball645Num1);
-      ballNum2Path = widget.ball645Num2 == 0
-          ? ballIcon
-          : lottoImagePath.ball645imagePath(widget.ball645Num2);
-      ballNum3Path = widget.ball645Num3 == 0
-          ? ballIcon
-          : lottoImagePath.ball645imagePath(widget.ball645Num3);
-      ballNum4Path = widget.ball645Num4 == 0
-          ? ballIcon
-          : lottoImagePath.ball645imagePath(widget.ball645Num4);
-      ballNum5Path = widget.ball645Num5 == 0
-          ? ballIcon
-          : lottoImagePath.ball645imagePath(widget.ball645Num5);
-      ballNum6Path = widget.ball645Num6 == 0
-          ? ballIcon
-          : lottoImagePath.ball645imagePath(widget.ball645Num6);
-      ballNumBONUSPath = widget.ball645Numbonus == 0
-          ? ballIcon
-          : lottoImagePath.ball645imagePath(widget.ball645Numbonus);
+
+      List<int> mainNumbers = [
+        widget.ball645Num1,
+        widget.ball645Num2,
+        widget.ball645Num3,
+        widget.ball645Num4,
+        widget.ball645Num5,
+        widget.ball645Num6,
+        widget.ball645Numbonus
+      ];
+
+      // ballNum1Path = widget.ball645Num1 == 0
+      //     ? ballIcon
+      //     : lottoImagePath.ball645imagePath(widget.ball645Num1);
+      // ballNum2Path = widget.ball645Num2 == 0
+      //     ? ballIcon
+      //     : lottoImagePath.ball645imagePath(widget.ball645Num2);
+      // ballNum3Path = widget.ball645Num3 == 0
+      //     ? ballIcon
+      //     : lottoImagePath.ball645imagePath(widget.ball645Num3);
+      // ballNum4Path = widget.ball645Num4 == 0
+      //     ? ballIcon
+      //     : lottoImagePath.ball645imagePath(widget.ball645Num4);
+      // ballNum5Path = widget.ball645Num5 == 0
+      //     ? ballIcon
+      //     : lottoImagePath.ball645imagePath(widget.ball645Num5);
+      // ballNum6Path = widget.ball645Num6 == 0
+      //     ? ballIcon
+      //     : lottoImagePath.ball645imagePath(widget.ball645Num6);
+      // ballNumBONUSPath = widget.ball645Numbonus == 0
+      //     ? ballIcon
+      //     : lottoImagePath.ball645imagePath(widget.ball645Numbonus);
+
+      for (int i = 0; i < mainNumbers.length; i++) {
+        ballNumPath[i] = mainNumbers[i] == -1
+            ? ballIcon
+            : lottoImagePath.ball645imagePath(mainNumbers[i]);
+      }
     });
-    print('----------------------------------$ballNum1Path');
+    //print('----------------------------------$ballNum1Path');
   }
 
   @override

@@ -17,25 +17,25 @@ class lottoImagePath{
 
     switch(color){
       case w:
-        path = '$path W_$number.png';
+        path = '${path}W_$number.png';
         break;
       case r:
-        path = '$path R_$number.png';
+        path = '${path}R_$number.png';
         break;
       case o:
-        path = '$path O_$number.png';
+        path = '${path}O_$number.png';
         break;
       case y:
-        path = '$path Y_$number.png';
+        path = '${path}Y_$number.png';
         break;
       case b:
-        path = '$path B_$number.png';
+        path = '${path}B_$number.png';
         break;
       case p:
-        path = '$path P_$number.png';
+        path = '${path}P_$number.png';
         break;
       case g:
-        path = '$path G_$number.png';
+        path = '${path}G_$number.png';
         break;
         default : path = 'assets/images/ball_icon.png';
     }

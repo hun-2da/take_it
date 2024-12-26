@@ -1,9 +1,13 @@
+
+
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../NumberGenerator/ButtonPage.dart';
+import '../../ball_Database/AccessToDatabase720/getRow720.dart';
 import '../../ball_Database/DatabaseHelper.dart';
-import '../../main.dart';
 import '../../ball_Database/DropDownButtonList.dart';
 import '../ChoiceButtonItem/RoundToDate.dart';
 import '../ListPage.dart';
@@ -29,11 +33,20 @@ class Lotto720PageState extends State<Lotto720Page>{
   bool checkbox3 = false;
 
 
+  int ball720Num1 = -1;
+  int ball720Num2 = -1;
+  int ball720Num3 = -1;
+  int ball720Num4 = -1;
+  int ball720Num5 = -1;
+  int ball720Num6 = -1;
+  int ball720GroupNum = -1;
+
+  List<int> ball720BonusNumList = [-1,-1,-1,-1,-1,-1];
+
   Lotto720PageState(){
     Future.delayed(Duration(seconds: 0), () {
       setDownButton();
     });
-
   }
 
   Future<void> setDownButton() async {
@@ -52,6 +65,7 @@ class Lotto720PageState extends State<Lotto720Page>{
 
   }
 
+  /**DropDownButton의 동작에 의해 처리되는 메소드*/
   choiceItem(String item) async {
     String setChoice = item;
     String setDate = await RoundToDate.getDateFromWeeks(item,720);
@@ -63,7 +77,43 @@ class Lotto720PageState extends State<Lotto720Page>{
       _round = 'NO.$setRound';
 
     });
+    Map<String, dynamic>? get_columnPrize645 = await getRow720.getRowById720(item);
+    printBallImage(get_columnPrize645);
 
+
+  }
+
+  /**볼 이미지를 적용시키기 위한 메소드*/
+  void printBallImage(Map<String, dynamic>? get_columnPrize720){
+    if (get_columnPrize720 != null) {
+
+        String prize = get_columnPrize720[LogDatabaseHelper.columnPrize720_1];
+        List<int> prizeList = prize.isNotEmpty
+            ? prize.split('').map((char) => int.parse(char)).toList()
+            : [];
+
+        String bonusPrize = get_columnPrize720[LogDatabaseHelper.columnBonus720];
+
+        ball720BonusNumList = bonusPrize.isNotEmpty
+            ? bonusPrize.split('').map((char) => int.parse(char)).toList()
+            : [];
+
+
+        setState(() {
+          ball720GroupNum = prizeList[0];
+          ball720Num1 = prizeList[1];
+          ball720Num2 =  prizeList[2];
+          ball720Num3 =  prizeList[3];
+          ball720Num4 =  prizeList[4];
+          ball720Num5 =  prizeList[5];
+          ball720Num6 = prizeList[6];
+
+          _lottoDate = '$_lottoDate\n월 7,000,000 원';
+        });
+    }else{
+      print("해당 prize는 존재하지 않음(645)");
+
+    }
   }
 
 
@@ -107,6 +157,7 @@ class Lotto720PageState extends State<Lotto720Page>{
                 right: 3,
                 child: Text(
                   _lottoDate,
+                  textAlign: TextAlign.right,
                   style: TextStyle(
                       fontSize: 13.7,
                       color: Colors.black26,
@@ -218,7 +269,16 @@ class Lotto720PageState extends State<Lotto720Page>{
               child: Container(
 
                   color: Colors.transparent,
-                  child: ball720()
+                  child: ball720(
+                      ball720Num1,
+                      ball720Num2,
+                      ball720Num3,
+                      ball720Num4,
+                      ball720Num5,
+                      ball720Num6,
+                      ball720GroupNum,
+                      ball720BonusNumList
+                  )
 
               ),
 

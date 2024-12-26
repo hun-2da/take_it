@@ -88,7 +88,7 @@ class Lotto645PageState extends State<Lotto645Page>{
         _lottoDate = '$_lottoDate\n1인당  ${get_columnPrize645[LogDatabaseHelper
             .prizeMoney]} 원';
       });
-      print('aaaaaaaaaaaaaaaaaaaaaaaaaa');
+      //print('aaaaaaaaaaaaaaaaaaaaaaaaaa');
     }else{
       print("해당 prize는 존재하지 않음(645)");
 
