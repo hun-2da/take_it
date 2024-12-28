@@ -34,7 +34,7 @@ class ball_State extends State<ball645> {
   double ballopacity = 1;
   String ballIcon = "assets/images/ball_icon.png";
 
-  List <String?> ballNumPath = List.filled(7, null);
+  List <String?> ballNumPath = List.filled(7,"assets/images/ball_icon.png");
 
   String? ballNum1Path;
   String? ballNum2Path;
@@ -124,13 +124,25 @@ class ball_State extends State<ball645> {
                     height: 90,
                     child : Row(
                         mainAxisAlignment:MainAxisAlignment.center,
-                        children: [
+                        children:
+                        List.generate(4,
+                                (index) => Flexible(
+                                    child: Padding(
+                                        padding:  EdgeInsets.all(ballsize),
+                                      child: Opacity(
+                                        opacity: ballopacity,
+                                        child: Image.asset('${ballNumPath[index] ?? "assets/images/ball_icon.png"}'),),
+                                    )
+                                )
+                        )
+
+                      /*[
                           Flexible(
                               child : Padding(
                                   padding: EdgeInsets.all(ballsize),
                                   child: Opacity(
                                       opacity: ballopacity,
-                                      child: Image.asset(ballNum1Path!)
+                                      child: Image.asset('${ballNumPath[0]?? "assets/images/ball_icon.png"}')
                                   )
                               )
                           ),
@@ -139,7 +151,7 @@ class ball_State extends State<ball645> {
                                   padding: EdgeInsets.all(ballsize),
                                   child: Opacity(
                                       opacity: ballopacity,
-                                      child: Image.asset(ballNum2Path!)
+                                      child: Image.asset('${ballNumPath[1]?? "assets/images/ball_icon.png"}')
                                   )
                               )
                           ),
@@ -148,7 +160,7 @@ class ball_State extends State<ball645> {
                                   padding: EdgeInsets.all(ballsize),
                                   child: Opacity(
                                       opacity: ballopacity,
-                                      child: Image.asset(ballNum3Path!)
+                                      child: Image.asset('${ballNumPath[2]?? "assets/images/ball_icon.png"}')
                                   )
                               )
                           ),
@@ -157,11 +169,11 @@ class ball_State extends State<ball645> {
                                   padding: EdgeInsets.all(ballsize),
                                   child: Opacity(
                                       opacity: ballopacity,
-                                      child: Image.asset(ballNum4Path!)
+                                      child: Image.asset('${ballNumPath[3]?? "assets/images/ball_icon.png"}')
                                   )
                               )
                           ),
-                        ]
+                        ]*/
                     ),
                   ),
                   SizedBox(
@@ -176,49 +188,18 @@ class ball_State extends State<ball645> {
                       bottom: 0.0, // 하단 여백 50 추가하여 70으로 설정
                     ),
                     height: 100,
-                    child : Row(
-                      mainAxisAlignment:MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                            child : Padding(
-                                padding: EdgeInsets.all(ballsize),
-                                child: Opacity(
-                                    opacity: ballopacity,
-                                    child: Image.asset(ballNum5Path!)
-                                )
-                            )
-                        ),
-                        Expanded(
-                            child : Padding(
-                                padding: EdgeInsets.all(ballsize),
-                                child: Opacity(
-                                    opacity: ballopacity,
-                                    child: Image.asset(ballNum6Path!)
-                                )
-                            )
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.all(ballsize), // 원하는 여백 설정
-                            child: FittedBox(
-                              child: Icon(
-                                Icons.add,
-                                color: Colors.black,
-                              ),
-                            ),
+                    child: Row(
+                      children: List.generate(4, (index) => Flexible(
+                        child: Padding(
+                          padding: EdgeInsets.all(ballsize),
+                          child: Opacity(
+                              opacity: ballopacity,
+                            child: index ==2 ?
+                            Image.asset("assets/images/lotto645/add_image.png") :
+                            Image.asset('${ballNumPath[index < 2 ? index + 4 : 6] ?? "assets/images/ball_icon.png"}')
                           ),
                         ),
-                        Expanded(
-                            child : Padding(
-                                padding: EdgeInsets.all(ballsize),
-                                child: Opacity(
-                                    opacity: ballopacity,
-                                    child: Image.asset(ballNumBONUSPath!)
-                                )
-                            )
-
-                        ),
-                      ],
+                      )),
                     ),
                   ),
                 ]

@@ -28,13 +28,13 @@ class Lotto645PageState extends State<Lotto645Page>{
 
   String _round= 'NO.1';
 
-  int _ball645Num1 = 0;
-  int _ball645Num2 = 0;
-  int _ball645Num3 = 0;
-  int _ball645Num4 = 0;
-  int _ball645Num5 = 0;
-  int _ball645Num6 = 0;
-  int _ball645Numbonus = 0;
+  int _ball645Num1 = -1;
+  int _ball645Num2 = -1;
+  int _ball645Num3 = -1;
+  int _ball645Num4 = -1;
+  int _ball645Num5 = -1;
+  int _ball645Num6 = -1;
+  int _ball645Numbonus = -1;
 
 
 
