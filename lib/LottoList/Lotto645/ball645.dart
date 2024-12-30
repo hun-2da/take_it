@@ -135,45 +135,6 @@ class ball_State extends State<ball645> {
                                     )
                                 )
                         )
-
-                      /*[
-                          Flexible(
-                              child : Padding(
-                                  padding: EdgeInsets.all(ballsize),
-                                  child: Opacity(
-                                      opacity: ballopacity,
-                                      child: Image.asset('${ballNumPath[0]?? "assets/images/ball_icon.png"}')
-                                  )
-                              )
-                          ),
-                          Flexible(
-                              child : Padding(
-                                  padding: EdgeInsets.all(ballsize),
-                                  child: Opacity(
-                                      opacity: ballopacity,
-                                      child: Image.asset('${ballNumPath[1]?? "assets/images/ball_icon.png"}')
-                                  )
-                              )
-                          ),
-                          Flexible(
-                              child : Padding(
-                                  padding: EdgeInsets.all(ballsize),
-                                  child: Opacity(
-                                      opacity: ballopacity,
-                                      child: Image.asset('${ballNumPath[2]?? "assets/images/ball_icon.png"}')
-                                  )
-                              )
-                          ),
-                          Flexible(
-                              child : Padding(
-                                  padding: EdgeInsets.all(ballsize),
-                                  child: Opacity(
-                                      opacity: ballopacity,
-                                      child: Image.asset('${ballNumPath[3]?? "assets/images/ball_icon.png"}')
-                                  )
-                              )
-                          ),
-                        ]*/
                     ),
                   ),
                   SizedBox(

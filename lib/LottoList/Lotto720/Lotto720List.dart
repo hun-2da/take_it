@@ -4,11 +4,14 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:take_it/toolbox/PageTracker.dart';
 
 import '../../NumberGenerator/ButtonPage.dart';
 import '../../ball_Database/AccessToDatabase720/getRow720.dart';
 import '../../ball_Database/DatabaseHelper.dart';
 import '../../ball_Database/DropDownButtonList.dart';
+import '../../toolbox/DateInfo.dart';
+import '../../toolbox/IdSelector.dart';
 import '../ChoiceButtonItem/RoundToDate.dart';
 import '../ListPage.dart';
 import 'ball720.dart';
@@ -43,14 +46,17 @@ class Lotto720PageState extends State<Lotto720Page>{
 
   List<int> ball720BonusNumList = [-1,-1,-1,-1,-1,-1];
 
-  Lotto720PageState(){
-    Future.delayed(Duration(seconds: 0), () {
-      setDownButton();
-    });
+  bool _isDropdownLoading = true;
+
+
+  @override
+  void initState() {
+    super.initState();
+    setDownButton();
   }
 
   Future<void> setDownButton() async {
-    await Future.delayed(Duration(seconds: 2));
+    //await Future.delayed(Duration(seconds: 2));
     List<String> fetchedItems = await DbToButton.getItem(LogDatabaseHelper.table720Name, LogDatabaseHelper.columnId720);
     String lastRound = ListPage.round720.toString();
 
@@ -58,10 +64,14 @@ class Lotto720PageState extends State<Lotto720Page>{
     if (mounted) {
       setState(() {
         _lottoNumber720 = fetchedItems;
+        //print(fetchedItems);
         _lastNumber720 = lastRound;
+
+
       });
     }
-    choiceItem(lastRound);
+      choiceItem(lastRound);
+      //print("asdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
   }
 
@@ -71,12 +81,13 @@ class Lotto720PageState extends State<Lotto720Page>{
     String setDate = await RoundToDate.getDateFromWeeks(item,720);
     String setRound = item;
 
-    setState(() {
-      _lastNumber720 = setChoice;
-      _lottoDate = setDate;
-      _round = 'NO.$setRound';
 
-    });
+      setState(() {
+        _lastNumber720 = setChoice;
+        _lottoDate = setDate;
+        _round = 'NO.$setRound';
+      });
+
     Map<String, dynamic>? get_columnPrize645 = await getRow720.getRowById720(item);
     printBallImage(get_columnPrize645);
 
@@ -109,6 +120,8 @@ class Lotto720PageState extends State<Lotto720Page>{
           ball720Num6 = prizeList[6];
 
           _lottoDate = '$_lottoDate\n월 7,000,000 원';
+
+          _isDropdownLoading = false; // 로딩 완료
         });
     }else{
       print("해당 prize는 존재하지 않음(645)");
@@ -128,137 +141,27 @@ class Lotto720PageState extends State<Lotto720Page>{
             Positioned(
                 top: 10.0,
                 left: 0.0,
-                child:  Card(
-                    margin: EdgeInsets.all(0),
-                    color:  Color.fromRGBO(60, 209, 163, 1),
-                    child: Padding(
-                      padding: const EdgeInsets.all(3.0), // Card 안쪽 패딩
-                      child: Text(
-                        _round,
-                        style: TextStyle(
-                            fontSize: 13.7,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold
-                        ),
-                      ),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(0), // 왼쪽 상단 모서리 둥글게
-                        topRight: Radius.circular(7.7), // 오른쪽 상단 모서리 둥글게
-                        bottomLeft: Radius.circular(0.0), // 왼쪽 하단 모서리는 둥글지 않게
-                        bottomRight: Radius.circular(7.7), // 오른쪽 하단 모서리는 둥글지 않게
-                      ),
-                    )
-                )
+                child: _isDropdownLoading
+                    ? CircularProgressIndicator() // 로딩 표시
+                    :PageTracker(_round, Color.fromRGBO(60, 209, 163, 1))
             ),
             Positioned(
                 top: 0,
                 right: 3,
-                child: Text(
-                  _lottoDate,
-                  textAlign: TextAlign.right,
-                  style: TextStyle(
-                      fontSize: 13.7,
-                      color: Colors.black26,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.bold
-                  ),
-
-                )
+                child: _isDropdownLoading
+                    ? CircularProgressIndicator() // 로딩 표시
+                    :DateInfo(_lottoDate)
             ),
             Positioned(
                 top: 100,
                 right: 0,
-
-                child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container (
-                          width: 77,
-                          height: 30,
-                          //color: Color.fromRGBO(64, 64, 64, .37),
-                          child : Card(
-                            color: Colors.transparent, // 투명한 배경색
-                            elevation: 0,
-                            child : TextField(
-                              textAlign: TextAlign.center,
-                              keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
-                                //labelText: '이름 입력',
-                                hintText: '모두 선택',
-                                //border: OutlineInputBorder(),
-                                hintStyle: TextStyle(
-
-                                  color: Colors.black54, // 힌트 텍스트의 색상을 회색으로 설정
-                                ),
-                              ),
-                              onChanged: (text) {
-
-                              },
-                              style: TextStyle(
-                                color: Colors.black54,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
-                            ),
-                          )
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                          left: 5.0,  // 왼쪽 여백 20
-                          top: 0.0,   // 위쪽 여백 20
-                          right: 5.0, // 오른쪽 여백 20
-                          bottom: 0.0, // 하단 여백 50 추가하여 70으로 설정
-                        ),
-                        child : Text(
-                            '~',
-                            style: TextStyle(
-                                fontSize: 30,
-                                color: Colors.black26,
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.bold
-                            )
-
-                        ),
-                      ),
-                      Container(
-                          width: 100,
-                          height: 30,
-                          //color: Color.fromRGBO(64, 64, 64, .37),
-                          child : Card(
-                              color: Colors.transparent, // 투명한 배경색
-                              elevation: 0,
-                              child : DropdownButton<String>(
-                                value: _lastNumber720,
-                                hint: Text(
-                                  '숫자 선택',
-                                  style: TextStyle(color: Colors.white, fontSize: 16), // 힌트 텍스트 스타일
-                                ),
-                                items: _lottoNumber720.map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(
-                                      '$value 회',
-                                      style: TextStyle(
-                                          color: Colors.black54,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold
-                                      ), // 힌트 텍스트 스타일
-                                    ),
-                                  );
-                                }).toList(),
-                                onChanged: (String? value) { // list에서 지정해둔 value가 그대로 콜백메소드 value로 파라미터 처ㄹ
-                                  setState(() {
-                                    choiceItem(value!);
-                                  });
-                                },
-
-                              )
-                          )
-                      )
-                    ]
-                )
+                child : _isDropdownLoading
+                    ? CircularProgressIndicator() // 로딩 표시
+                    : Idselector(
+                  _lottoNumber720,
+                  _lastNumber720,
+                  choiceItem,
+                ),
             ),
             Positioned(
               top: 170,

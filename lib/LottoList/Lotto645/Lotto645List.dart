@@ -9,6 +9,9 @@ import 'package:take_it/ball_Database/DatabaseHelper.dart';
 import '../../NumberGenerator/ButtonPage.dart';
 import '../../main.dart';
 import '../../ball_Database/DropDownButtonList.dart';
+import '../../toolbox/DateInfo.dart';
+import '../../toolbox/IdSelector.dart';
+import '../../toolbox/PageTracker.dart';
 import '../ListPage.dart';
 
 
@@ -36,7 +39,7 @@ class Lotto645PageState extends State<Lotto645Page>{
   int _ball645Num6 = -1;
   int _ball645Numbonus = -1;
 
-
+  bool _isDropdownLoading = true;
 
   /**생성자 함수 , 기본 세팅을 위해 */
   Lotto645PageState() {
@@ -87,6 +90,7 @@ class Lotto645PageState extends State<Lotto645Page>{
         _ball645Numbonus = get_columnPrize645[LogDatabaseHelper.columnBonus645];
         _lottoDate = '$_lottoDate\n1인당  ${get_columnPrize645[LogDatabaseHelper
             .prizeMoney]} 원';
+        _isDropdownLoading = false; // 로딩 완료
       });
       //print('aaaaaaaaaaaaaaaaaaaaaaaaaa');
     }else{
@@ -106,135 +110,28 @@ class Lotto645PageState extends State<Lotto645Page>{
             Positioned(
                 top: 10.0,
                 left: 0.0,
-                child:  Card(
-                    margin: EdgeInsets.all(0),
-                    color:  Color.fromRGBO(243, 41, 75, 1),
-                    child: Padding(
-                      padding: const EdgeInsets.all(3.0), // Card 안쪽 패딩
-                      child: Text(
-                        _round,
-                        style: TextStyle(
-                            fontSize: 13.7,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold
-                        ),
-                      ),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(0), // 왼쪽 상단 모서리 둥글게
-                        topRight: Radius.circular(7.7), // 오른쪽 상단 모서리 둥글게
-                        bottomLeft: Radius.circular(0.0), // 왼쪽 하단 모서리는 둥글지 않게
-                        bottomRight: Radius.circular(7.7), // 오른쪽 하단 모서리는 둥글지 않게
-                      ),
-                    )
-                )
+                child: _isDropdownLoading
+                    ? CircularProgressIndicator() // 로딩 표시
+                    :PageTracker(_round,Color.fromRGBO(243, 41, 75, 1))
             ),
             Positioned(
                 top: 0,
                 right: 3,
-                child: Text(
-                  _lottoDate,
-                  textAlign: TextAlign.right,
-                  style: TextStyle(
-                      fontSize: 13.7,
-                      color: Colors.black26,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.bold
-                  ),
-
-                )
+                child:
+                _isDropdownLoading
+                    ? CircularProgressIndicator() // 로딩 표시
+                    :DateInfo(_lottoDate)
             ),
             Positioned(
                 top: 100,
                 right: 0,
-                child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container (
-                          width: 77,
-                          height: 30,
-                          //color: Color.fromRGBO(64, 64, 64, .37),
-                          child : Card(
-                            color: Colors.transparent, // 투명한 배경색
-                            elevation: 0,
-                            child : TextField(
-                              textAlign: TextAlign.center,
-                              keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
-                                //labelText: '이름 입력',
-                                hintText: '모두 선택',
-                                //border: OutlineInputBorder(),
-                                hintStyle: TextStyle(
-
-                                  color: Colors.black54, // 힌트 텍스트의 색상을 회색으로 설정
-                                ),
-                              ),
-                              onChanged: (text) {
-
-                              },
-                              style: TextStyle(
-                                color: Colors.black54,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
-                            ),
-                          )
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                          left: 5.0,  // 왼쪽 여백 20
-                          top: 0.0,   // 위쪽 여백 20
-                          right: 5.0, // 오른쪽 여백 20
-                          bottom: 0.0, // 하단 여백 50 추가하여 70으로 설정
-                        ),
-                        child : Text(
-                            '~',
-                            style: TextStyle(
-                                fontSize: 30,
-                                color: Colors.black26,
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.bold
-                            )
-
-                        ),
-                      ),
-                      Container(
-                          width: 100,
-                          height: 30,
-                          //color: Color.fromRGBO(64, 64, 64, .37),
-                          child : Card(
-                              color: Colors.transparent, // 투명한 배경색
-                              elevation: 0,
-                              child : DropdownButton<String>(
-                                value: _lastNumber645,
-                                hint: Text(
-                                  '숫자 선택',
-                                  style: TextStyle(color: Colors.white, fontSize: 16), // 힌트 텍스트 스타일
-                                ),
-                                items: _lottoNumber645.map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(
-                                      '$value 회',
-                                      style: TextStyle(
-                                          color: Colors.black54,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold
-                                      ), // 힌트 텍스트 스타일
-                                    ),
-                                  );
-                                }).toList(),
-                                onChanged: (String? value) { // list에서 지정해둔 value가 그대로 콜백메소드 value로 파라미터 처ㄹ
-                                  //setState(() {
-                                  choiceItem(value!);
-                                  //});
-                                },
-                              )
-                          )
-                      )
-                    ]
-                )
+                child:  _isDropdownLoading
+                    ? CircularProgressIndicator() // 로딩 표시
+                    : Idselector(
+                  _lottoNumber645,
+                  _lastNumber645,
+                  choiceItem,
+                ),
             ),
             Positioned(
                 top: 200,

@@ -2,15 +2,17 @@
 
 로또 번호 생성 앱
 
-## Getting Started
+현재 기능
 
-This project is a starting point for a Flutter application.
+**_lotto645
+lotto720_**
+_이전 당첨 기록 열람_
 
-A few resources to get you started if this is your first Flutter project:
+이번 처리 작업:
+645 , 720 코드의 중복 UI를 class별로 따로 정리하여 처리
+* class 생성 : DateInfo(UI오른쪽 윗부분 날짜 관련), IdSelector(회차 선택 부분) , PageTracker(UI왼쪽 윗부분의 회차) 
+    - 645 및 720에 해당 클레스를 사용하여 중복 코드를 줄임
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* 720List에서 제대로 동작하지 않던 회차 동기화 부분을 수정
+    - 랜더링 순서에 따른 문제 ( database 를 불러오기전에 UI를 호출해버렸음. 필드에 bool형 자료형을 추가하여 SetState안에서 해당 변수를 변화시켜 UI를 동작하게끔 처리)
+    - 이전에 객체 생성 -> 메서드 호출로 UI를 업데이트 하는데 있어서 오류가 있었음 (파라미터로 메서드를 보내주는 형태로 변경 -> 해결)
