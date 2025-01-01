@@ -16,12 +16,7 @@ class PageTracker extends StatefulWidget {
   PageCounter createState() => PageCounter();
 }
 class PageCounter extends State<PageTracker> {
-  String _round= 'NO.1';
-  @override
-  void initState() {
-    super.initState();
-    _round = widget._round;
-  }
+
 
 
   Widget build(BuildContext context) {
@@ -33,7 +28,7 @@ class PageCounter extends State<PageTracker> {
           child: Padding(
             padding: const EdgeInsets.all(3.0), // Card 안쪽 패딩
             child: Text(
-              _round,
+              widget._round,
               style: TextStyle(
                   fontSize: 13.7,
                   color: Colors.white,

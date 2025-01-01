@@ -6,18 +6,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:take_it/toolbox/PageTracker.dart';
 
-import '../../NumberGenerator/ButtonPage.dart';
-import '../../ball_Database/AccessToDatabase720/getRow720.dart';
-import '../../ball_Database/DatabaseHelper.dart';
-import '../../ball_Database/DropDownButtonList.dart';
-import '../../toolbox/DateInfo.dart';
-import '../../toolbox/IdSelector.dart';
-import '../ChoiceButtonItem/RoundToDate.dart';
+import '../../../NumberGenerator/ButtonPage.dart';
+import '../../../ball_Database/AccessToDatabase720/getRow720.dart';
+import '../../../ball_Database/DatabaseHelper.dart';
+import '../../../ball_Database/DropDownButtonList.dart';
+import '../../../toolbox/DateInfo.dart';
+import '../../../toolbox/IdSelector.dart';
+
+import '../../ChoiceButtonItem/RoundToDate.dart';
 import '../ListPage.dart';
+
 import 'ball720.dart';
 
 
 class Lotto720Page extends StatefulWidget {
+  /**파라미터로 받은 메소드*/
+  final Function(String startNum,String endNum,bool LottoType) getSelectedRange;
+
+  Lotto720Page(this.getSelectedRange);
+
   @override
   Lotto720PageState createState() => Lotto720PageState();
 }
@@ -158,9 +165,12 @@ class Lotto720PageState extends State<Lotto720Page>{
                 child : _isDropdownLoading
                     ? CircularProgressIndicator() // 로딩 표시
                     : Idselector(
-                  _lottoNumber720,
-                  _lastNumber720,
+                  false,
+                  widget.getSelectedRange,
+                    _lottoNumber720,
+                    _lastNumber720,
                   choiceItem,
+                  ListPage.round720
                 ),
             ),
             Positioned(

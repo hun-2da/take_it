@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:take_it/LottoList/ChoiceButtonItem/RoundToDate.dart';
-import 'package:take_it/LottoList/ListPage.dart';
-import 'package:take_it/LottoList/Lotto645/Lotto645List.dart';
 
-import '../LottoList/Lotto720/Lotto720List.dart';
+
+import '../LottoManager/ChoiceButtonItem/RoundToDate.dart';
+import '../LottoManager/mainListPage/ListPage.dart';
 import 'Crawling/lotto645Crawling.dart';
 import 'Crawling/lotto720Crawling.dart';
 import 'DatabaseHelper.dart';

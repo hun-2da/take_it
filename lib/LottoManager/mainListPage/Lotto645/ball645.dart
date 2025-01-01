@@ -1,7 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:take_it/LottoList/lottoBallImagePath.dart';
+
+import '../../lottoBallImagePath.dart';
 
 class ball645 extends StatefulWidget {
   int ball645Num1 = -1;

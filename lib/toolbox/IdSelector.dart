@@ -1,38 +1,36 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../LottoList/Lotto720/Lotto720List.dart';
+
 
 /**번호 선택 downButton이랑 관련된 UI*/
 class Idselector extends StatefulWidget {
 
   List<String> _lottoNumber  = ['1'];
-  String _lastNumber = '1';
+  String _MylastNumber = '1';
+  int lastNumber = 1;
 
   /**파라미터로 받은 메소드*/
   final ValueChanged<String> changeItem;
+  /**파라미터로 받은 메소드*/
+  final Function(String startNum,String endNum,bool LottoType) getSelectedRange;
 
+  bool LottoType = true;
   Idselector(
+      this.LottoType,
+  this.getSelectedRange,
       this._lottoNumber,
-      this._lastNumber,
-      this.changeItem
+      this._MylastNumber,
+      this.changeItem,
+      this.lastNumber
       );
 
   @override
   ball_Id_Selector createState() => ball_Id_Selector();
 }
 class ball_Id_Selector extends State<Idselector> {
-  late List<String> _lottoNumber;
-  late String _lastNumber;
 
-
-
-  @override
-  void initState() {
-    super.initState();
-    _lottoNumber = widget._lottoNumber;
-    _lastNumber = widget._lastNumber;
-  }
+  String userInputNumber = "";
 
   @override
   Widget build(BuildContext context) {
@@ -61,12 +59,25 @@ class ball_Id_Selector extends State<Idselector> {
                         ),
                       ),
                       onChanged: (text) {
+                        if (text.isNotEmpty) {
+                          int myInputNumber = int.parse(text);
+                          if (0 < myInputNumber) {
+                            if (myInputNumber > widget.lastNumber)
+                              text = widget.lastNumber.toString();
+                            userInputNumber = text;
+                            setState(() {
+                              widget._MylastNumber = text;
 
+                            });
+                            widget.changeItem(text);
+                            widget.getSelectedRange(text,text,widget.LottoType);
+                          }
+                        }
                       },
                       style: TextStyle(
                         color: Colors.black54,
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 13,
                       ),
                     ),
                   )
@@ -97,12 +108,12 @@ class ball_Id_Selector extends State<Idselector> {
                       color: Colors.transparent, // 투명한 배경색
                       elevation: 0,
                       child : DropdownButton<String>(
-                        value: _lastNumber,
+                        value: widget._MylastNumber,
                         hint: Text(
                           '숫자 선택',
                           style: TextStyle(color: Colors.white, fontSize: 16), // 힌트 텍스트 스타일
                         ),
-                        items: _lottoNumber.map<DropdownMenuItem<String>>((String value) {
+                        items: widget._lottoNumber.map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(
@@ -118,9 +129,11 @@ class ball_Id_Selector extends State<Idselector> {
                         onChanged: (String? value) { // list에서 지정해둔 value가 그대로 콜백메소드 value로 파라미터 처ㄹ
                           if(value != null){
                             setState(() {
-                              _lastNumber = value!;
+                              widget._MylastNumber = value!;
+
                             });
                             widget.changeItem(value!);
+                            widget.getSelectedRange("",value!,widget.LottoType);
                           }
                         },
 

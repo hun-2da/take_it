@@ -15,20 +15,15 @@ class DateInfo extends StatefulWidget {
   DateContext createState() => DateContext();
 }
 class DateContext extends State<DateInfo> {
-  String _lottoDate= '2000.11.04';
 
-  @override
-  void initState() {
-    super.initState();
-    _lottoDate = widget._lottoDate;
-  }
+
 
 
   Widget build(BuildContext context) {
     return Material(
         color: Colors.transparent,
         child: Text(
-          _lottoDate,
+          widget._lottoDate,
           textAlign: TextAlign.right,
           style: TextStyle(
               fontSize: 13.7,

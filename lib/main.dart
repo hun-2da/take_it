@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'LottoList/ListPage.dart';
-import 'LottoList/Lotto645/Lotto645List.dart';
-import 'LottoList/Lotto720/Lotto720List.dart';
+import 'LottoManager/mainListPage/ListPage.dart';
 import 'ball_Database/DatabaseCheck.dart';
 import 'ball_Database/DatabaseHelper.dart';
 import 'main_colors.dart';
