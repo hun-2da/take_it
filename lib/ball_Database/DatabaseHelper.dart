@@ -4,60 +4,63 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
 class LogDatabaseHelper {
-  static final databaseName = "lottolog.db";
-  static final _databaseVersion = 1;
+  static const databaseName = "lottolog.db";
+  static const _databaseVersion = 1;
 
   // Table names
   /**645 테이블 이름 */
-  static final table645Name = "table645";
+  static const table645Name = "table645";
   /**720 테이블 이름 */
-  static final table720Name = "table720";
-  static final logTable645 = "user_645log";
-  static final logTable720 = "user_720log";
+  static const table720Name = "table720";
+  static const logTable645 = "user_645log";
+  static const logTable720 = "user_720log";
 
   // Columns for 6/45
-  static final columnId645 = "id";
-  static final columnPrize645_1 = "prize1";
-  static final columnPrize645_2 = "prize2";
-  static final columnPrize645_3 = "prize3";
-  static final columnPrize645_4 = "prize4";
-  static final columnPrize645_5 = "prize5";
-  static final columnPrize645_6 = "prize6";
-  static final columnBonus645 = "bonus";
-  static final prizeMoney = "prizeMoney";
+  static const columnId645 = "id";
+  static const columnPrize645_1 = "prize1";
+  static const columnPrize645_2 = "prize2";
+  static const columnPrize645_3 = "prize3";
+  static const columnPrize645_4 = "prize4";
+  static const columnPrize645_5 = "prize5";
+  static const columnPrize645_6 = "prize6";
+  static const columnBonus645 = "bonus";
+  static const prizeMoney = "prizeMoney";
+
+  //추가용
+  static const columnPrize645_ = "prize";
 
   // Columns for 720+
-  static final columnId720 = "id";
-  static final columnPrize720_1 = "prize1";
-  static final columnPrize720_2 = "prize2";
-  static final columnPrize720_3 = "prize3";
-  static final columnPrize720_4 = "prize4";
-  static final columnPrize720_5 = "prize5";
-  static final columnPrize720_6 = "prize6";
-  static final columnPrize720_7 = "prize7";
-  static final columnBonus720 = "bonus";
+  static const columnId720 = "id";
+  static const columnPrize720_1 = "prize1";
+  static const columnPrize720_2 = "prize2";
+  static const columnPrize720_3 = "prize3";
+  static const columnPrize720_4 = "prize4";
+  static const columnPrize720_5 = "prize5";
+  static const columnPrize720_6 = "prize6";
+  static const columnPrize720_7 = "prize7";
+  static const columnBonus720 = "bonus";
 
 
   // Columns for user logs 645
-  static final columnUserId645 = "id";
-  static final columnUserDateId645 = "date_id";
-  static final columnUserChoice645_1 = "choice1";
-  static final columnUserChoice645_2 = "choice2";
-  static final columnUserChoice645_3 = "choice3";
-  static final columnUserChoice645_4 = "choice4";
-  static final columnUserChoice645_5 = "choice5";
-  static final columnUserChoice645_6 = "choice6";
+  static const columnUserId645 = "id";
+  static const columnUserDateId645 = "date_id";
+  static const columnUserChoice645_1 = "choice1";
+  static const columnUserChoice645_2 = "choice2";
+  static const columnUserChoice645_3 = "choice3";
+  static const columnUserChoice645_4 = "choice4";
+  static const columnUserChoice645_5 = "choice5";
+  static const columnUserChoice645_6 = "choice6";
 
   // Columns for user logs 720
-  static final columnUserId720 = "id";
-  static final columnUserDateId720 = "date_id";
-  static final columnUserChoice720_1 = "choice1";
-  static final columnUserChoice720_2 = "choice2";
-  static final columnUserChoice720_3 = "choice3";
-  static final columnUserChoice720_4 = "choice4";
-  static final columnUserChoice720_5 = "choice5";
-  static final columnUserChoice720_6 = "choice6";
-  static final columnUserChoice720_7 = "choice7";
+  static const columnUserId720 = "id";
+  static const columnUserDateId720 = "date_id";
+  static const columnUserChoice720_1 = "choice1";
+  static const columnUserChoice720_2 = "choice2";
+  static const columnUserChoice720_3 = "choice3";
+  static const columnUserChoice720_4 = "choice4";
+  static const columnUserChoice720_5 = "choice5";
+  static const columnUserChoice720_6 = "choice6";
+  static const columnUserChoice720_7 = "choice7";
 
   // Singleton pattern
   LogDatabaseHelper._privateConstructor();
