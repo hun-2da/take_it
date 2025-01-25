@@ -2,7 +2,6 @@
 
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:take_it/toolbox/PageTracker.dart';
 
@@ -20,10 +19,10 @@ import 'ball720.dart';
 
 
 class Lotto720Page extends StatefulWidget {
-  /**파라미터로 받은 메소드*/
+  /// 파라미터로 받은 메소드
   final Function(String startNum,String endNum,bool LottoType) getSelectedRange;
 
-  Lotto720Page(this.getSelectedRange);
+  const Lotto720Page(this.getSelectedRange, {super.key});
 
   @override
   Lotto720PageState createState() => Lotto720PageState();
@@ -82,10 +81,10 @@ class Lotto720PageState extends State<Lotto720Page>{
 
   }
 
-  /**DropDownButton의 동작에 의해 처리되는 메소드*/
+  /// DropDownButton의 동작에 의해 처리되는 메소드
   choiceItem(String item) async {
     String setChoice = item;
-    String setDate = await RoundToDate.getDateFromWeeks(item,720);
+    String setDate = RoundToDate.getDateFromWeeks(item,720);
     String setRound = item;
 
 
@@ -95,22 +94,22 @@ class Lotto720PageState extends State<Lotto720Page>{
         _round = 'NO.$setRound';
       });
 
-    Map<String, dynamic>? get_columnPrize645 = await getRow720.getRowById720(item);
-    printBallImage(get_columnPrize645);
+    Map<String, dynamic>? getColumnprize645 = await getRow720.getRowById720(item);
+    printBallImage(getColumnprize645);
 
 
   }
 
-  /**볼 이미지를 적용시키기 위한 메소드*/
-  void printBallImage(Map<String, dynamic>? get_columnPrize720){
-    if (get_columnPrize720 != null) {
+  /// 볼 이미지를 적용시키기 위한 메소드
+  void printBallImage(Map<String, dynamic>? getColumnprize720){
+    if (getColumnprize720 != null) {
 
-        String prize = get_columnPrize720[LogDatabaseHelper.columnPrize720_1];
+        String prize = getColumnprize720[LogDatabaseHelper.columnPrize720_1];
         List<int> prizeList = prize.isNotEmpty
             ? prize.split('').map((char) => int.parse(char)).toList()
             : [];
 
-        String bonusPrize = get_columnPrize720[LogDatabaseHelper.columnBonus720];
+        String bonusPrize = getColumnprize720[LogDatabaseHelper.columnBonus720];
 
         ball720BonusNumList = bonusPrize.isNotEmpty
             ? bonusPrize.split('').map((char) => int.parse(char)).toList()
@@ -140,7 +139,7 @@ class Lotto720PageState extends State<Lotto720Page>{
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Color.fromRGBO(235, 222, 214, 1),
+      color: const Color.fromRGBO(235, 222, 214, 1),
       child: Center(
         child: Stack(
           alignment: Alignment.center,
@@ -149,21 +148,21 @@ class Lotto720PageState extends State<Lotto720Page>{
                 top: 10.0,
                 left: 0.0,
                 child: _isDropdownLoading
-                    ? CircularProgressIndicator() // 로딩 표시
-                    :PageTracker(_round, Color.fromRGBO(60, 209, 163, 1))
+                    ? const CircularProgressIndicator() // 로딩 표시
+                    :PageTracker(_round, const Color.fromRGBO(60, 209, 163, 1))
             ),
             Positioned(
                 top: 0,
                 right: 3,
                 child: _isDropdownLoading
-                    ? CircularProgressIndicator() // 로딩 표시
+                    ? const CircularProgressIndicator() // 로딩 표시
                     :DateInfo(_lottoDate)
             ),
             Positioned(
                 top: 100,
                 right: 0,
                 child : _isDropdownLoading
-                    ? CircularProgressIndicator() // 로딩 표시
+                    ? const CircularProgressIndicator() // 로딩 표시
                     : Idselector(
                   false,
                   widget.getSelectedRange,
@@ -197,7 +196,7 @@ class Lotto720PageState extends State<Lotto720Page>{
 
 
             ),
-            Positioned(
+            const Positioned(
               width: 230,
               height: 150,
               top: 450,
@@ -205,7 +204,7 @@ class Lotto720PageState extends State<Lotto720Page>{
               child: LottoStartButton(),
 
             ),
-            Positioned(
+            const Positioned(
                 left: 0,
                 bottom: 0,
                 child: Text(
@@ -217,7 +216,7 @@ class Lotto720PageState extends State<Lotto720Page>{
                     )
                 )
             ),
-            Positioned(
+            const Positioned(
                 right: 3,
                 bottom: 0,
                 child: Text(

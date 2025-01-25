@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../lottoBallImagePath.dart';
@@ -22,7 +21,7 @@ class ball720 extends StatefulWidget {
       this.ball720Num5,
       this.ball720Num6,
       this.ball720GroupNum,
-      this.ball720BonusNumList
+      this.ball720BonusNumList, {super.key}
       );
 
   @override
@@ -55,7 +54,7 @@ class ball_State extends State<ball720> {
     updateBallPaths();
   }
 
-  /** 상태 클래스는 부모 위젯(StatefulWidget) 데이터를 직접 접근할 수 없기 때문에, widget. 키워드를 통해 접근합니다.*/
+  /// 상태 클래스는 부모 위젯(StatefulWidget) 데이터를 직접 접근할 수 없기 때문에, widget. 키워드를 통해 접근합니다.
   void updateBallPaths() {
     setState(() {
       // 첫 번째 번호 그룹 처리
@@ -125,25 +124,25 @@ class ball_State extends State<ball720> {
                                 '$ballNumGroupNumPath',
                               )
                           ),
-                          Text('보너스 확인')
+                          const Text('보너스 확인')
                         ]
                     )
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Flexible(
                   flex: 9,
                   child : Column(
                     children: List.generate(3, (index) => Flexible(
-                        child : Image.asset('${ballImagePaths[index] ?? "assets/images/ball_icon.png"}')
+                        child : Image.asset(ballImagePaths[index] ?? "assets/images/ball_icon.png")
                     )),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Flexible(
                     flex: 9,
                     child : Column(
                       children: List.generate(3, (index) => Flexible(
-                          child : Image.asset('${ballImagePaths[index + 3] ?? "assets/images/ball_icon.png"}')
+                          child : Image.asset(ballImagePaths[index + 3] ?? "assets/images/ball_icon.png")
                       )),
                     )
                 )

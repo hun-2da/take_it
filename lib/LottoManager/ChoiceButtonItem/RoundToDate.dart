@@ -16,10 +16,11 @@ class RoundToDate{
     int IntegerRound =  int.parse(round)-1;
     late DateTime startDate;
 
-    if(choice == 645)
+    if(choice == 645) {
       startDate = DateTime(2002, 12, 7);
-    else
+    } else {
       startDate = DateTime(2020, 5, 7);
+    }
 
 
     // 주 수에 해당하는 일수를 추가하여 목표 날짜를 계산합니다.

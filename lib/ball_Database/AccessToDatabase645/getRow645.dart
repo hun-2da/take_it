@@ -2,7 +2,7 @@ import '../DatabaseHelper.dart';
 
 class getRow645{
 
-  /**파라미터에 해당하는 행을 반환*/
+  /// 파라미터에 해당하는 행을 반환
   static Future<Map<String, dynamic>?> getRowById(String id) async {
     final dbHelper = LogDatabaseHelper.instance;
     final db = await dbHelper.database;

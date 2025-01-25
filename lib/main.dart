@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:sqflite/sqflite.dart';
 
 import 'LottoManager/mainListPage/ListPage.dart';
 import 'ball_Database/DatabaseCheck.dart';
-import 'ball_Database/DatabaseHelper.dart';
 import 'main_colors.dart';
 
 void main() {
@@ -35,7 +32,7 @@ class _MainPageState extends State<MainPage> {
           primarySwatch: customPurple,
         ),
         debugShowCheckedModeBanner: false, // 상단 appbar의 우측 배너 제거
-        home: ListPage()
+        home: const ListPage()
 
     );
   }

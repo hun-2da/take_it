@@ -1,7 +1,7 @@
 import '../DatabaseHelper.dart';
 
 class getRow720{
-  /** 파라미터에 해당하는 행을 반환 (테이블 720) */
+  /// 파라미터에 해당하는 행을 반환 (테이블 720)
   static Future<Map<String, dynamic>?> getRowById720(String id) async {
     final dbHelper = LogDatabaseHelper.instance;
     final db = await dbHelper.database;

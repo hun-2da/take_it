@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../main_colors.dart';
@@ -13,6 +12,8 @@ class ListPage extends StatefulWidget {
   static int round645 = 1;
   static int round720 = 1;
 
+  const ListPage({super.key});
+
   //const ListPage({super.key});
 
   @override
@@ -20,14 +21,14 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> with DataStatsDialog {
-  String startNum  = '1';
-  String endNum = '1';
 
-  /** true 이면 645 false 이면 720 */
+
+
+  @override
   bool LottoType = true;
 
   // PageController를 상태 클래스에서 선언
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
 
   @override
   void dispose() {
@@ -38,10 +39,12 @@ class _ListPageState extends State<ListPage> with DataStatsDialog {
   void getSelectedRange(String startNum,String endNum,bool LottoType){
 
     setState(() {
-      if(startNum != "")
+      if(startNum != "") {
         this.startNum = startNum;
-      if(endNum != "")
+      }
+      if(endNum != "") {
         this.endNum = endNum;
+      }
 
       this.LottoType = LottoType;
 
@@ -62,13 +65,13 @@ class _ListPageState extends State<ListPage> with DataStatsDialog {
             bottom: 70.7,
             child : Container(
                 child: Container(
-                  margin: EdgeInsets.only(
+                  margin: const EdgeInsets.only(
                     left: 24.0,  // 왼쪽 여백 20
                     top: 0,   // 위쪽 여백 20
                     right: 16.0, // 오른쪽 여백 20
                     bottom: 0.0, // 하단 여백 50 추가하여 70으로 설정
                   ),
-                  color: Color.fromRGBO(222, 201, 192, 1),
+                  color: const Color.fromRGBO(222, 201, 192, 1),
                 ),
             ),
           ),
@@ -85,14 +88,14 @@ class _ListPageState extends State<ListPage> with DataStatsDialog {
             child : Container(
                 child: Card(
                   elevation: 7.7,
-                  margin: EdgeInsets.only(
+                  margin: const EdgeInsets.only(
                     left: 20.0,  // 왼쪽 여백 20
                     top: 0.0,   // 위쪽 여백 20
                     right: 20.0, // 오른쪽 여백 20
                     bottom: 0.0, // 하단 여백 50 추가하여 70으로 설정
                   ), // PageView에 여백 설정
                   child: Card(
-                    margin: EdgeInsets.all(0),
+                    margin: const EdgeInsets.all(0),
                     elevation: 0,
                     child: PageView(
                       controller: _pageController, // PageController 사용

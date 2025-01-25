@@ -5,7 +5,14 @@ import '../DatabaseHelper.dart';
 class Lotto645Storage{
 
 
-  Future<Map<int, int>> getLottoFrequency(int startNum, int endNum) async {
+  final Function(Map<int, int>,Map<int, int>) setMydbList;
+
+  Lotto645Storage(this.setMydbList);
+
+
+  void/*Future<Map<int, int>>*/ getLottoFrequency(int startNum, int endNum) async {
+
+    print('------------------------------------------------$startNum--------------------$endNum');
     //final db = await database;
     Database db =  await LogDatabaseHelper.instance.database;
     // SQL 쿼리 실행
@@ -34,10 +41,11 @@ class Lotto645Storage{
 
       if(i!=0) {
         frequencyMap[i] = 0;
-      }
-      if(i<10) {
         bonusFrequencyMap[i] = 0;
       }
+      /*if(i<10) {
+        bonusFrequencyMap[i] = 0;
+      }*/
     }
     // 보너스 키 추가
     //frequencyMap[LogDatabaseHelper.columnBonus645] = 0;
@@ -55,14 +63,21 @@ class Lotto645Storage{
       }
 
       int bonusColumValue = row[LogDatabaseHelper.columnBonus645]; // 각 칼럼명 생성
-      bonusFrequencyMap[bonusColumValue] = bonusFrequencyMap[bonusColumValue]! + 1;
+
+      if (bonusFrequencyMap != null) {
+        if (!bonusFrequencyMap.containsKey(bonusColumValue)) {
+          bonusFrequencyMap[bonusColumValue] = 0;
+        }
+        bonusFrequencyMap[bonusColumValue] = bonusFrequencyMap[bonusColumValue]! + 1;
+      }
       /*// 보너스 번호 빈도수 증가
       int bonusNumber = row[LogDatabaseHelper.columnBonus645];
       frequencyMap[LogDatabaseHelper.columnBonus645] = frequencyMap[LogDatabaseHelper.columnBonus645]! + 1;*/
 
     }
 
-    return frequencyMap;
+    setMydbList(frequencyMap,bonusFrequencyMap);
+
   }
 
 }

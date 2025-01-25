@@ -1,13 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-/**날짜와 관련된 UI*/
+/// 날짜와 관련된 UI
 class DateInfo extends StatefulWidget {
 
 
   String _lottoDate= '2000.11.04';
 
-  DateInfo(
+   DateInfo(
       this._lottoDate
       );
 
@@ -19,13 +18,14 @@ class DateContext extends State<DateInfo> {
 
 
 
+  @override
   Widget build(BuildContext context) {
     return Material(
         color: Colors.transparent,
         child: Text(
           widget._lottoDate,
           textAlign: TextAlign.right,
-          style: TextStyle(
+          style: const TextStyle(
               fontSize: 13.7,
               color: Colors.black26,
               fontStyle: FontStyle.italic,

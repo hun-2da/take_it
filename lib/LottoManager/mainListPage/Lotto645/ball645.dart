@@ -1,5 +1,4 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../lottoBallImagePath.dart';
@@ -21,7 +20,7 @@ class ball645 extends StatefulWidget {
       this.ball645Num4,
       this.ball645Num5,
       this.ball645Num6,
-      this.ball645Numbonus,
+      this.ball645Numbonus, {super.key}
       );
 
 
@@ -116,7 +115,7 @@ class ball_State extends State<ball645> {
                 children: [
                   Container(
                     //color: Color.fromRGBO(64, 64, 64, .37),
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       left: 17.0,  // 왼쪽 여백 20
                       top: 0.0,   // 위쪽 여백 20
                       right: 17.0, // 오른쪽 여백 20
@@ -132,18 +131,18 @@ class ball_State extends State<ball645> {
                                         padding:  EdgeInsets.all(ballsize),
                                       child: Opacity(
                                         opacity: ballopacity,
-                                        child: Image.asset('${ballNumPath[index] ?? "assets/images/ball_icon.png"}'),),
+                                        child: Image.asset(ballNumPath[index] ?? "assets/images/ball_icon.png"),),
                                     )
                                 )
                         )
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 7,
                   ),
                   Container(
                     //color: Color.fromRGBO(64, 64, 64, .73),
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       left: 17.0,  // 왼쪽 여백 20
                       top: 0.0,   // 위쪽 여백 20
                       right: 17.0, // 오른쪽 여백 20
@@ -158,7 +157,7 @@ class ball_State extends State<ball645> {
                               opacity: ballopacity,
                             child: index ==2 ?
                             Image.asset("assets/images/lotto645/add_image.png") :
-                            Image.asset('${ballNumPath[index < 2 ? index + 4 : 6] ?? "assets/images/ball_icon.png"}')
+                            Image.asset(ballNumPath[index < 2 ? index + 4 : 6] ?? "assets/images/ball_icon.png")
                           ),
                         ),
                       )),

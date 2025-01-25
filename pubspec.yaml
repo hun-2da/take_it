@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  fl_chart: ^0.70.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -52,7 +53,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
-  fl_chart: ^0.63.0
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -69,8 +70,8 @@ flutter:
 
   assets:
 
-#    - images/a_dot_burr.jpeg
-#    - images/a_dot_ham.jpeg
+    #    - images/a_dot_burr.jpeg
+    #    - images/a_dot_ham.jpeg
     - assets/images/
     - assets/images/lotto645/
     - assets/images/lotto720/

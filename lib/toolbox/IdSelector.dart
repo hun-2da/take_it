@@ -1,18 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
 
-/**번호 선택 downButton이랑 관련된 UI*/
+/// 번호 선택 downButton이랑 관련된 UI
 class Idselector extends StatefulWidget {
 
   List<String> _lottoNumber  = ['1'];
   String _MylastNumber = '1';
   int lastNumber = 1;
 
-  /**파라미터로 받은 메소드*/
+  /// 파라미터로 받은 메소드
   final ValueChanged<String> changeItem;
-  /**파라미터로 받은 메소드*/
+  /// 파라미터로 받은 메소드
   final Function(String startNum,String endNum,bool LottoType) getSelectedRange;
 
   bool LottoType = true;
@@ -22,7 +21,7 @@ class Idselector extends StatefulWidget {
       this._lottoNumber,
       this._MylastNumber,
       this.changeItem,
-      this.lastNumber
+      this.lastNumber, {super.key}
       );
 
   @override
@@ -39,7 +38,7 @@ class ball_Id_Selector extends State<Idselector> {
         child:Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container (
+              SizedBox (
                   width: 77,
                   height: 30,
                   //color: Color.fromRGBO(64, 64, 64, .37),
@@ -49,7 +48,7 @@ class ball_Id_Selector extends State<Idselector> {
                     child : TextField(
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         //labelText: '이름 입력',
                         hintText: '모두 선택',
                         //border: OutlineInputBorder(),
@@ -62,8 +61,9 @@ class ball_Id_Selector extends State<Idselector> {
                         if (text.isNotEmpty) {
                           int myInputNumber = int.parse(text);
                           if (0 < myInputNumber) {
-                            if (myInputNumber > widget.lastNumber)
+                            if (myInputNumber > widget.lastNumber) {
                               text = widget.lastNumber.toString();
+                            }
                             userInputNumber = text;
                             setState(() {
                               widget._MylastNumber = text;
@@ -74,7 +74,7 @@ class ball_Id_Selector extends State<Idselector> {
                           }
                         }
                       },
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black54,
                         fontWeight: FontWeight.bold,
                         fontSize: 13,
@@ -83,13 +83,13 @@ class ball_Id_Selector extends State<Idselector> {
                   )
               ),
               Container(
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                   left: 5.0,  // 왼쪽 여백 20
                   top: 0.0,   // 위쪽 여백 20
                   right: 5.0, // 오른쪽 여백 20
                   bottom: 0.0, // 하단 여백 50 추가하여 70으로 설정
                 ),
-                child : Text(
+                child : const Text(
                     '~',
                     style: TextStyle(
                         fontSize: 30,
@@ -100,8 +100,8 @@ class ball_Id_Selector extends State<Idselector> {
 
                 ),
               ),
-              Container(
-                  width: 100,
+              SizedBox(
+                  //width: 100,
                   height: 30,
                   //color: Color.fromRGBO(64, 64, 64, .37),
                   child : Card(
@@ -109,7 +109,7 @@ class ball_Id_Selector extends State<Idselector> {
                       elevation: 0,
                       child : DropdownButton<String>(
                         value: widget._MylastNumber,
-                        hint: Text(
+                        hint: const Text(
                           '숫자 선택',
                           style: TextStyle(color: Colors.white, fontSize: 16), // 힌트 텍스트 스타일
                         ),
@@ -118,7 +118,7 @@ class ball_Id_Selector extends State<Idselector> {
                             value: value,
                             child: Text(
                               '$value 회',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.black54,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold
@@ -129,11 +129,11 @@ class ball_Id_Selector extends State<Idselector> {
                         onChanged: (String? value) { // list에서 지정해둔 value가 그대로 콜백메소드 value로 파라미터 처ㄹ
                           if(value != null){
                             setState(() {
-                              widget._MylastNumber = value!;
+                              widget._MylastNumber = value;
 
                             });
-                            widget.changeItem(value!);
-                            widget.getSelectedRange("",value!,widget.LottoType);
+                            widget.changeItem(value);
+                            widget.getSelectedRange("",value,widget.LottoType);
                           }
                         },
 

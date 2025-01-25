@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-/**회차수와 관련된 UI*/
+/// 회차수와 관련된 UI
 class PageTracker extends StatefulWidget {
 
 
@@ -9,7 +8,7 @@ class PageTracker extends StatefulWidget {
   Color Page_Color = Colors.black;
 
   PageTracker(
-      this._round, this.Page_Color
+      this._round, this.Page_Color, {super.key}
       );
 
   @override
@@ -19,29 +18,30 @@ class PageCounter extends State<PageTracker> {
 
 
 
+  @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
       child:  Card(
-          margin: EdgeInsets.all(0),
-          color:  widget.Page_Color,/*Color.fromRGBO(60, 209, 163, 1),*/
-          child: Padding(
-            padding: const EdgeInsets.all(3.0), // Card 안쪽 패딩
-            child: Text(
-              widget._round,
-              style: TextStyle(
-                  fontSize: 13.7,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold
-              ),
-            ),
-          ),
-          shape: RoundedRectangleBorder(
+          margin: const EdgeInsets.all(0),
+          color:  widget.Page_Color,
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(0),
               topRight: Radius.circular(7.7),
               bottomLeft: Radius.circular(0.0),
               bottomRight: Radius.circular(7.7),
+            ),
+          ),/*Color.fromRGBO(60, 209, 163, 1),*/
+          child: Padding(
+            padding: const EdgeInsets.all(3.0), // Card 안쪽 패딩
+            child: Text(
+              widget._round,
+              style: const TextStyle(
+                  fontSize: 13.7,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
+              ),
             ),
           )
       ),

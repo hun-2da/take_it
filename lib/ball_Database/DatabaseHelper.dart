@@ -8,9 +8,9 @@ class LogDatabaseHelper {
   static const _databaseVersion = 1;
 
   // Table names
-  /**645 테이블 이름 */
+  /// 645 테이블 이름
   static const table645Name = "table645";
-  /**720 테이블 이름 */
+  /// 720 테이블 이름
   static const table720Name = "table720";
   static const logTable645 = "user_645log";
   static const logTable720 = "user_720log";
