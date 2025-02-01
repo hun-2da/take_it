@@ -17,15 +17,15 @@ class ListPage extends StatefulWidget {
   //const ListPage({super.key});
 
   @override
-  _ListPageState createState() => _ListPageState();
+  ListPageState createState() => ListPageState();
 }
 
-class _ListPageState extends State<ListPage> with DataStatsDialog {
+class ListPageState extends State<ListPage> with DataStatsDialog {
 
 
 
-  @override
-  bool LottoType = true;
+  //@override
+  //bool LottoType = true;
 
   // PageController를 상태 클래스에서 선언
   final PageController _pageController = PageController();

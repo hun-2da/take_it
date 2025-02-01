@@ -16,6 +16,8 @@ class Lotto645Stats_Chart extends StatefulWidget {
 
   Function(Map<int, double>,Map<int, double>) onColorsUpdated;
 
+
+
   /**컬러 통계를 내기위한 변수*/
 
   //Function(Map<int,double>) getMyColorsMapStates;
@@ -47,12 +49,12 @@ class Lotto645Stats_Chart extends StatefulWidget {
 
 
 class ChartState  extends State<Lotto645Stats_Chart> {
-
-
+  int touchedIndex = -1;
+  late num total;
   @override
   Widget build(BuildContext context) {
 
-    //final total = widget._frequencyMap.isNotEmpty ? widget._frequencyMap.values.reduce((a, b) => a + b) : 0; // 값의 합 계산 (예외 처리)
+    total = widget._frequencyMap.isNotEmpty ? widget._frequencyMap.values.reduce((a, b) => a + b) : 0; // 값의 합 계산 (예외 처리)
 
 
     return PieChart(
@@ -60,28 +62,41 @@ class ChartState  extends State<Lotto645Stats_Chart> {
         sections: generateSections(),
         centerSpaceRadius: widget.chartR, // 중앙 공간 설정
         sectionsSpace: 1,     // 섹션 간 간격
-        pieTouchData: PieTouchData( // 터치 이벤트 설정
+
+        pieTouchData: PieTouchData(// 터치 이벤트 설정
+
           touchCallback: (FlTouchEvent event, pieTouchResponse) {
             if (event is FlTapUpEvent && pieTouchResponse != null) {
-              final index = pieTouchResponse.touchedSection?.touchedSectionIndex;
-              if (index != null) {
-                debugPrint('Touched section: ${index+1} ------------------');
-              /*  final percentage = total == 0 ? 0 : ( (index+1) / total) * 100;
+
+              setState(() {
+                touchedIndex = pieTouchResponse.touchedSection!.touchedSectionIndex;
+              });
 
 
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('${index+1}의 번호는 ${percentage}%에 해당됩니다.'),
-                    duration: Duration(seconds: 2), // 표시 시간 설정
-                  ),
-                );
-*/
+              //final value = pieTouchResponse.touchedSection?.touchedSection?.value;
 
-              }
             }
+
           },
+            /*touchCallback: (FlTouchEvent event, pieTouchResponse) {
+              if (event is FlLongPressStart && pieTouchResponse != null) {
+                setState(() {
+                  touchedIndex =
+                      pieTouchResponse.touchedSection!.touchedSectionIndex;
+                });
+              } else if (event is FlLongPressEnd) {
+                setState(() {
+                  touchedIndex = -1; // 초기화 (선택 해제)
+                });
+              }
+            }*/
+
+
         ),
+
+
       ),
+
     );
   }
 
@@ -95,14 +110,19 @@ class ChartState  extends State<Lotto645Stats_Chart> {
 
     //print('||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||$frequencyMap');
 
-
+    int index = 0;
 
     widget._frequencyMap.forEach((key, value) {
       // print('==============================================$key');
 
+      String percentage = "${(total == 0 ? 0 : ((value)! / total) * 100).toStringAsFixed(1)}%";
+        //debugPrint('Touched section: ${value} ------------------ ${percentage}');
 
 
+      final bool isTouched = index == touchedIndex;
       sections.add(
+
+
         PieChartSectionData(
           color: getPieColor(key,value,widget._color), // 색상 반복 적용
           value: value.toDouble(),
@@ -114,9 +134,29 @@ class ChartState  extends State<Lotto645Stats_Chart> {
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
+          badgeWidget: isTouched
+              ? Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Color.fromARGB(203, 47, 48, 53),
+              border: Border.all(color: Colors.indigo),
+              borderRadius: BorderRadius.circular(7),
+            ),
+            child: Text(
+              '$key 번째 숫자는 : \n$percentage',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 13.7,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+          )
+              : null,
+          badgePositionPercentageOffset: 1,
         ),
       );
-      //index++;
+      index++;
     });
 
 
@@ -141,6 +181,7 @@ class ChartState  extends State<Lotto645Stats_Chart> {
       colorIndex =  LottoStatisticsChart645.RedNum;
     }else if(frequency_key <41){                         //회색
       colorIndex =  LottoStatisticsChart645.GrayNum;
+
     }else if(frequency_key < 46){                       // 초록
       colorIndex =  LottoStatisticsChart645.GreenNum;
     }

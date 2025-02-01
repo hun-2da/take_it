@@ -16,7 +16,7 @@ mixin DataStatsDialog{
   void showCustomBottomSheet(BuildContext context) {
     showModalBottomSheet(
         //backgroundColor: Color.fromRGBO(242, 226, 220, 0.93),
-        backgroundColor: Color.fromRGBO(255, 255, 255, 0.87777777),
+        backgroundColor: const Color.fromRGBO(255, 255, 255, 0.87777777),
         //backgroundColor: Color.fromRGBO(255, 255, 255, 0.93),
         context: context,
         isScrollControlled: true, // 키보드 대응 및 높이 조절
@@ -49,7 +49,7 @@ mixin DataStatsDialog{
                                 //padding: EdgeInsets.only(top: 50,bottom: 50),
 
                                 child: Padding(
-                                    padding: EdgeInsets.only(right: 7),
+                                    padding: const EdgeInsets.only(right: 7),
                                     child: ElevatedButton(
                                         onPressed: () {
                                           Navigator.of(context).pop(); // BottomSheet 닫기
@@ -58,11 +58,11 @@ mixin DataStatsDialog{
                                           // 버튼 고유의 배경/그림자 제거하여 DecoratedBox가 보이도록
                                           elevation: 0,
                                           //backgroundColor: Colors.transparent,
-                                          backgroundColor : Color.fromRGBO(255, 255, 255, 0.9),
+                                          backgroundColor : const Color.fromRGBO(255, 255, 255, 0.9),
                                           // 기본 버튼 패딩을 없애 DecoratedBox의 스타일을 정확히 보여주기
-                                          padding: EdgeInsets.only(right: 7,left: 7),
+                                          padding: const EdgeInsets.only(right: 7,left: 7),
                                           // 물리적 버튼 영역(탭 이벤트 감지 범위) 모서리 반경 설정
-                                          shape: RoundedRectangleBorder(
+                                          shape: const RoundedRectangleBorder(
                                             borderRadius: BorderRadius.only(
                                                 topRight: Radius.circular(3),
                                                 topLeft: Radius.circular(3),
@@ -80,22 +80,22 @@ mixin DataStatsDialog{
 
                                         child : Container(
                                           //width: double.infinity,
-                                          margin: EdgeInsets.only(bottom: 16,top: 7),
+                                          margin: const EdgeInsets.only(bottom: 16,top: 7),
                                           child: DecoratedBox(
                                             decoration: BoxDecoration(
-                                              border: Border(
+                                              border: const Border(
                                                 left: BorderSide(color: Colors.indigo, width: 3),
                                                 right: BorderSide(color: Colors.indigo, width: 3),
                                                 top: BorderSide(color: Colors.indigo, width: 3),    // 위 테두리
                                                 bottom: BorderSide(color: Colors.indigo, width: 3), // 아래 테두리
                                               ),
                                               borderRadius: BorderRadius.circular(1),
-                                              color: Color.fromRGBO(255, 255, 255, 0),
+                                              color: const Color.fromRGBO(255, 255, 255, 0),
                                             ),
                                             // DecoratedBox 안에 내용 배치를 위해 Padding 등 사용
                                             child: Container(
                                               padding: const EdgeInsets.symmetric(horizontal: 15, vertical:1.5),
-                                              child: Text(
+                                              child: const Text(
                                                 'CLOSE',
                                                 style: TextStyle(color: Colors.black, fontSize: 20),
                                               ),

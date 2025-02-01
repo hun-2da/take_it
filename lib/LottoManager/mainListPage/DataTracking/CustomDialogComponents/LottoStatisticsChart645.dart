@@ -9,7 +9,7 @@ import '../../../../ball_Database/AccessToDatabase645/getLotto645Storage.dart';
 class LottoStatisticsChart645 extends StatefulWidget {
   static int YellowNum = 0,BlueNum = 1, RedNum = 2, GrayNum = 3, GreenNum = 4;
 
-  static Map<int, Color>? ball645Colors = {
+  static final Map<int, Color>? ball645Colors = {
     0: const Color.fromARGB(255, 237, 222, 56), // 노란색
     1: const Color.fromARGB(255, 66, 182, 255),  // 파란색
     2: const Color.fromARGB(255, 251, 21, 31),   // 빨간색
@@ -100,7 +100,7 @@ class LottoChartBuilder extends State<LottoStatisticsChart645> {
           ),
           const SizedBox(height: 37), // 간격
 
-          Divider(
+          const Divider(
             color: Colors.black12, // 구분선 색상
             thickness: 2,       // 두께
             indent: 20,         // 왼쪽 여백
