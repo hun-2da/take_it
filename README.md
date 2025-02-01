@@ -16,8 +16,8 @@ _이전 당첨 기록 열람_
 ## 720통계
 <table>
   <tr>
-    <td><img src="./capture/645tooltip.png" alt="645 pieChart toolTip" width="400"></td>
-    <td><img src="./capture/720tooltip.png" alt="barChart_toolTip" width="200"></td>
+    <td><img src="./capture/645tooltip.png" alt="645 pieChart toolTip" width="230"></td>
+    <td><img src="./capture/720tooltip.png" alt="barChart_toolTip" width="230"></td>
   </tr>
 
 </table>
