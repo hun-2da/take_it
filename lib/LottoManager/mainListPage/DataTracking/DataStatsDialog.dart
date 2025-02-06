@@ -5,12 +5,12 @@ import 'CustomDialogComponents/LottoStatisticsChart720.dart';
 
 
 mixin DataStatsDialog{
-  String startNum  = '1';
+  String startNum  = '-1';
   String endNum = '1';
 
   /// true 이면 645 false 이면 720
-  bool LottoType = true;
-
+  //bool LottoType = true;
+  late int currentPage = 0;
 
 
   void showCustomBottomSheet(BuildContext context) {
@@ -108,9 +108,6 @@ mixin DataStatsDialog{
 
                               //padding: EdgeInsets.only(top: 5,bottom: 5),
 
-
-
-
                             ),
                           ),
 
@@ -119,7 +116,7 @@ mixin DataStatsDialog{
                           const SizedBox(height: 13),
 
 
-                          LottoType?
+                          (currentPage == 0) ?
 
                           LottoStatisticsChart645(int.parse(startNum),int.parse(endNum))
                               :

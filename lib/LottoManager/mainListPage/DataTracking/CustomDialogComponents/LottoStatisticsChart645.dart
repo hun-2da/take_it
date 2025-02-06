@@ -51,12 +51,16 @@ class LottoChartBuilder extends State<LottoStatisticsChart645> {
   late int colorSwitch;
 
 
-
   bool BonusColor = true;
+
+
+  //LottoChartBuilder(){widget.startNum = -1;}
 
   @override
   void initState() {
     super.initState();
+
+
     _bonusColors = {
       LottoStatisticsChart645.YellowNum : 0,
       LottoStatisticsChart645.BlueNum : 0,
@@ -71,6 +75,7 @@ class LottoChartBuilder extends State<LottoStatisticsChart645> {
       LottoStatisticsChart645.GrayNum : 0,
       LottoStatisticsChart645.GreenNum : 0
     };
+
     Lotto645Storage(setMydbList).getLottoFrequency(widget.startNum,widget.lastNum);
 
     colorSwitch = 0;

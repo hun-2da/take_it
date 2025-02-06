@@ -12,11 +12,11 @@ class Idselector extends StatefulWidget {
   /// 파라미터로 받은 메소드
   final ValueChanged<String> changeItem;
   /// 파라미터로 받은 메소드
-  final Function(String startNum,String endNum,bool LottoType) getSelectedRange;
+  final Function(String startNum,String endNum/*,bool LottoType*/) getSelectedRange;
 
-  bool LottoType = true;
+  //bool LottoType = true;
   Idselector(
-      this.LottoType,
+      //this.LottoType,
   this.getSelectedRange,
       this._lottoNumber,
       this._MylastNumber,
@@ -70,8 +70,11 @@ class ball_Id_Selector extends State<Idselector> {
 
                             });
                             widget.changeItem(text);
-                            widget.getSelectedRange(text,text,widget.LottoType);
+                            widget.getSelectedRange(text,text/*,widget.LottoType*/);
                           }
+                        }else if(text.isEmpty){
+                          widget.getSelectedRange("-1","-1"/*,widget.LottoType*/);
+                          //print("empty여야 하는데...............................................................");
                         }
                       },
                       style: const TextStyle(
@@ -133,7 +136,7 @@ class ball_Id_Selector extends State<Idselector> {
 
                             });
                             widget.changeItem(value);
-                            widget.getSelectedRange("",value,widget.LottoType);
+                            widget.getSelectedRange("",value/*,widget.LottoType*/);
                           }
                         },
 

@@ -23,7 +23,6 @@ class ListPage extends StatefulWidget {
 class ListPageState extends State<ListPage> with DataStatsDialog {
 
 
-
   //@override
   //bool LottoType = true;
 
@@ -36,17 +35,14 @@ class ListPageState extends State<ListPage> with DataStatsDialog {
     super.dispose();
   }
 
-  void getSelectedRange(String startNum,String endNum,bool LottoType){
+  void getSelectedRange(String startNum,String endNum/*,bool LottoType*/){
 
     setState(() {
-      if(startNum != "") {
-        this.startNum = startNum;
-      }
-      if(endNum != "") {
-        this.endNum = endNum;
-      }
 
-      this.LottoType = LottoType;
+        if (startNum != "") {this.startNum = startNum;}
+        if (endNum != "") {this.endNum = endNum;}
+
+      //this.LottoType = LottoType;
 
     });
   }
@@ -99,6 +95,11 @@ class ListPageState extends State<ListPage> with DataStatsDialog {
                     elevation: 0,
                     child: PageView(
                       controller: _pageController, // PageController 사용
+                      onPageChanged: (index){
+                        setState(() {
+                          currentPage = index; // 현재 페이지 업데이트
+                        });
+                      },
                       //onPageChanged: _onPageChanged,
                       children: [
                         Lotto645Page(getSelectedRange),

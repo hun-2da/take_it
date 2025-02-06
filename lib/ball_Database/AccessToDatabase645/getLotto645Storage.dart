@@ -1,5 +1,8 @@
+import 'package:html/parser.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../../LottoManager/ChoiceButtonItem/RoundToDate.dart';
+import '../../LottoManager/mainListPage/ListPage.dart';
 import '../DatabaseHelper.dart';
 
 class Lotto645Storage{
@@ -11,6 +14,11 @@ class Lotto645Storage{
 
 
   void/*Future<Map<int, int>>*/ getLottoFrequency(int startNum, int endNum) async {
+
+    if(startNum == -1) {
+      startNum = 1;
+      endNum = ListPage.round645;
+    }
 
     print('------------------------------------------------$startNum--------------------$endNum');
     //final db = await database;

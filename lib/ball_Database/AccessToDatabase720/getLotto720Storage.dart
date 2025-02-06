@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 
 import '../../LottoManager/mainListPage/DataTracking/CustomDialogComponents/LottoStatisticsChart720.dart';
+import '../../LottoManager/mainListPage/ListPage.dart';
 import '../DatabaseHelper.dart';
 
 class Lotto720Storage{
@@ -16,6 +17,13 @@ class Lotto720Storage{
   Lotto720Storage(this._setMyColorStats);
 
   void getLottoFrequency(int startNum, int endNum) async {
+
+    if(startNum == -1) {
+      startNum = 1;
+      endNum = ListPage.round720;
+    }
+
+
     Database db =  await LogDatabaseHelper.instance.database;
 
     final List<Map<String, dynamic>> result = await db.query(

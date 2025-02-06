@@ -17,7 +17,7 @@ import 'ball645.dart';
 class Lotto645Page extends StatefulWidget {
 
   /// 파라미터로 받은 메소드
-  final Function(String startNum,String endNum,bool lottoType) getSelectedRange;
+  final Function(String startNum,String endNum/*,bool lottoType*/) getSelectedRange;
 
   const Lotto645Page(this.getSelectedRange, {super.key});
 
@@ -133,7 +133,7 @@ class Lotto645PageState extends State<Lotto645Page>{
                 child:  _isDropdownLoading
                     ? const CircularProgressIndicator() // 로딩 표시
                     : Idselector(
-                  true,
+                  //true,
                     widget.getSelectedRange,
                     _lottoNumber645,
                     _lastNumber645,
@@ -142,10 +142,9 @@ class Lotto645PageState extends State<Lotto645Page>{
                 ),
             ),
             Positioned(
-                top: 200,
+                top: 177,
                 right: 0,
                 left: 0,
-
                 //width: 100,
                 height: 210,
                 child: Container(
@@ -163,12 +162,11 @@ class Lotto645PageState extends State<Lotto645Page>{
             ),
             const Positioned(
               width: 230,
-              height: 150,
-              top: 450,
+              height: 130,
+              //top: 450,
+              bottom: 47,
               right: 20,
-
               child: LottoStartButton(),
-
             ),
             const Positioned(
                 left: 0,

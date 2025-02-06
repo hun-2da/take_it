@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'GenratorComponents/GenratorCustomDialog.dart';
+
 
 class LottoStartButton extends StatefulWidget {
   const LottoStartButton({super.key});
@@ -38,7 +40,9 @@ class _StartButtonState extends State<LottoStartButton> {
                     ),
                     //color: Color.fromRGBO(243 , 243, 243, 1),
                     child : Column(
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
+
                       children: [
                         Row(
                           children: [
@@ -46,6 +50,7 @@ class _StartButtonState extends State<LottoStartButton> {
                               //alignment: Alignment.centerLeft,
                               child :Checkbox(
                                 value: checkbox1, // 현재 체크박스의 상태
+                                visualDensity: VisualDensity.compact, // Checkbox 크기 줄이기
                                 onChanged: (bool? value) {
                                   setState(() {
                                     checkbox1 = value!; // 상태 변경 시 setState를 통해 업데이트
@@ -56,13 +61,17 @@ class _StartButtonState extends State<LottoStartButton> {
                             const Text('지문'),
                           ],
                         ),
+                        //SizedBox(height: 1),
                         Row(
                           children: [
                             Container(
                                 child : Checkbox(
                                   value: checkbox2, // 현재 체크박스의 상태
+                                  visualDensity: VisualDensity.compact, // Checkbox 크기 줄이기
                                   onChanged: (bool? value) {
                                     setState(() {
+                                      if(checkbox3)
+                                        checkbox3 = false;
                                       checkbox2 = value!; // 상태 변경 시 setState를 통해 업데이트
                                     });
                                   },
@@ -71,13 +80,17 @@ class _StartButtonState extends State<LottoStartButton> {
                             const Text('현재 번호 기반'),
                           ],
                         ),
+                       // SizedBox(height: 1),
                         Row(
                           children: [
                             Container(
                               child : Checkbox(
                                 value: checkbox3, // 현재 체크박스의 상태
+                                visualDensity: VisualDensity.compact, // Checkbox 크기 줄이기
                                 onChanged: (bool? value) {
                                   setState(() {
+                                    if(checkbox2)
+                                      checkbox2 = false;
                                     checkbox3 = value!; // 상태 변경 시 setState를 통해 업데이트
                                   });
                                 },
@@ -87,18 +100,29 @@ class _StartButtonState extends State<LottoStartButton> {
                           ],
                         ),
                       ],
-
                     ),
                   ),
                   const SizedBox(
-                    width: 5,
+                    width: 3,
                   ),
                   Container(
                       child : Expanded(
                           child: ElevatedButton(
                             //fingerprint_icon
                               onPressed: (){
-
+                                showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (BuildContext context) {
+                                    return Dialog(
+                                      backgroundColor: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: GenratorCusomDialog()
+                                    );
+                                  },
+                                );
                               },
 
                               style: ElevatedButton.styleFrom(
@@ -120,10 +144,13 @@ class _StartButtonState extends State<LottoStartButton> {
 
                               child: Opacity(
                                 opacity: 0.1, // 이미지의 불투명도 설정 (0.0 ~ 1.0)
-                                child: Image.asset(
+                                child:
+                                checkbox1 ? Image.asset(
                                   'assets/images/fingerprint_icon.png',
                                   fit: BoxFit.cover, // 이미지를 버튼 전체에 맞춤
-                                ),
+                                ) : SizedBox.shrink()
+
+                                ,
                               )
 
                           )

@@ -56,11 +56,9 @@ class LottoChartBuilder extends State<LottoStatisticsChart720> {
   @override
   void initState() {
     super.initState();
-
+    //widget.startNum = -1;
     Lotto720Storage(_setMyColorStats).getLottoFrequency(widget.startNum,widget.lastNum);
-
   }
-
 
 
 
